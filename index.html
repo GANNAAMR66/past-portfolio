@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganna Amr Emad | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --beige-light: #F5F1ED;
+            --beige: #E8DFD8;
+            --brown-light: #D4C4B7;
+            --brown: #8B7355;
+            --brown-dark: #5C4A3D;
+            --text-dark: #3D3229;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--beige-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(245, 241, 237, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brown);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--brown);
+        }
+
+        /* Active Navigation Link */
+        .nav-links a.active {
+            color: var(--brown);
+            font-weight: 700;
+        }
+
+        .nav-links a.active::after {
+            background: var(--brown-dark);
+        }
+
+        .nav-links a.active:hover {
+            color: var(--brown-dark);
+        }
+
+        .nav-links a.active {
+            text-shadow: 0 0 10px rgba(139, 115, 85, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 5rem;
+            background: linear-gradient(135deg, var(--beige-light) 0%, var(--beige) 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none" stroke="%23D4C4B7" stroke-width="0.5" opacity="0.3"/></svg>');
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--brown);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--brown-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--brown-dark);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(93, 74, 61, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(93, 74, 61, 0.4);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+            scroll-margin-top: 80px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--brown-dark);
+            text-align: center;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(to left, var(--brown), transparent);
+            left: 20%;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--brown);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--beige) 0%, var(--brown-light) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--brown-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        /* Skills Section */
+        .skills {
+            background: var(--beige-light);
+        }
+
+        .skills-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            color: var(--brown-dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-bar {
+            background: var(--beige);
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .skill-progress {
+            background: linear-gradient(to left, var(--brown), var(--brown-light));
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease-out;
+            width: 0;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: var(--white);
+        }
+
+        .portfolio-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            background: var(--beige-light);
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.02);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-image {
+            transform: scale(1.05);
+        }
+
+        .portfolio-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--beige) 0%, var(--brown-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(93, 74, 61, 0.9), transparent);
+            padding: 2rem;
+            color: var(--white);
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        .portfolio-overlay h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .contact .section-title {
+            color: var(--white);
+        }
+
+        .contact .section-title::after {
+            background: linear-gradient(to left, var(--beige), transparent);
+        }
+
+        .contact .section-subtitle {
+            color: var(--beige);
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item span {
+            font-size: 1.5rem;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.85;
+            text-decoration: underline;
+        }
+
+        /* Phone Number Styling */
+        .contact-item a[href^="tel"] {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--white);
+            color: var(--brown-dark);
+            transform: translateY(-5px);
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover svg {
+            transform: scale(1.1);
+        }
+
+        .social-icon.telegram:hover { color: #0088cc; }
+        .social-icon.linkedin:hover { color: #0077b5; }
+        .social-icon.github:hover { color: #333; }
+        .social-icon.email:hover { color: #ea4335; }
+
+        /* Footer */
+        footer {
+            background: var(--brown-dark);
+            color: var(--beige);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content > * {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+        .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+        .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+        .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Ganna Amr Emad</a>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">My Skills</a></li>
+            <li><a href="#portfolio">My Work</a></li>
+            <li><a href="#contact">Contact Me</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="hero-subtitle">Hello</p>
+            <h1>I'm Ganna Amr</h1>
+            <p class="hero-description">AI and Software Engineer specializing in building intelligent and data-driven solutions. I have experience in Data Engineering, developing machine learning models, database management, Web Development, and automation tools that help businesses make smarter and faster decisions.</p>
+            <a href="#portfolio" class="cta-button">View my work</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About me</h2>
+        <p class="section-subtitle">Get to know me</p>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="photo_2025-09-11_03-42-34.jpg" alt="Ganna Amr">
+            </div>
+            <div class="about-text">
+                <h3>AI Engineer</h3>
+                <p>I focus on creating efficient, scalable, and high-quality solutions using modern technologies. My goal is to transform complex ideas into practical applications that deliver real value.</p>
+                <p>I'm passionate about solving real-world problems with AI and continuously improving systems to achieve the best performance and accuracy.</p>
+                <p>Focus on clean, efficient, and scalable code.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="section-title">My Skills</h2>
+        <p class="section-subtitle">What I produce</p>
+        <div class="skills-grid">
+            
+            <!-- Skill 1: Python -->
+            <div class="skill-card">
+                <div class="skill-icon">🐍</div>
+                <h3>Python</h3>
+                <p>AI, ML, Data Analysis, Automation</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--width: 95%"></div>
+                </div>
+            </div>
+            
+            <!-- Skill 2: C++ -->
+            <div class="skill-card">
+                <div class="skill-icon">⚡</div>
+                <h3>C++</h3>
+                <p>OOP, Data Structures, Embedded Systems</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--width: 92%"></div>
+                </div>
+            </div>
+            
+            <!-- Skill 3: OOP -->
+            <div class="skill-card">
+                <div class="skill-icon">🏗️</div>
+                <h3>OOP</h3>
+                <p>Object-Oriented Programming Principles</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--width: 78%"></div>
+                </div>
+            </div>
+            
+            <!-- Skill 4: Data Structures -->
+            <div class="skill-card">
+                <div class="skill-icon">📊</div>
+                <h3>Data Structures</h3>
+                <p>Arrays, Linked Lists, Trees, Graphs, Algorithms</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--width: 88%"></div>
+                </div>
+            </div>
+            
+            <!-- Skill 5: OpenCV -->
+            <div class="skill-card">
+                <div class="skill-icon">👁️</div>
+                <h3>OpenCV</h3>
+                <p>Computer vision projects including image processing, object detection, and real-time video analysis.</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--width: 80%"></div>
+                </div>
+            </div>
+            
+            <!-- Skill 6: Machine Learning -->
+            <div class="skill-card">
+                <div class="skill-icon">🤖</div>
+                <h3>Machine Learning</h3>
+                <p>Building predictive models using supervised & unsupervised learning, feature engineering, and model evaluation.</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--width: 66%"></div>
+                </div>
+            </div>
+            
+            <!-- Skill 7: Database -->
+            <div class="skill-card">
+                <div class="skill-icon">🗄️</div>
+                <h3>Database</h3>
+                <p>Designing, querying, and managing relational and non-relational databases using SQL and modern tools.</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--width: 90%"></div>
+                </div>
+            </div>
+            
+            <!-- Skill 8: Web Development -->
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h3>Web Development</h3>
+                <p>HTML5, CSS3, JavaScript, Responsive Design, Frontend Integration</p>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="--width: 75%"></div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <h2 class="section-title">My Works</h2>
+        <p class="section-subtitle">Forms of my projects</p>
+        <div class="portfolio-grid">
+            <!-- Project 1: Digital Safe Box -->
+            <div class="portfolio-item">
+                <a href="https://github.com/GANNAAMR66/Digital-Safe-Box-using-Logic-Gates" target="_blank" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop" alt="Digital Safe Box" class="portfolio-image" onerror="this.parentElement.querySelector('.portfolio-placeholder').style.display='flex'; this.style.display='none';">
+                    <div class="portfolio-placeholder" style="display: none;">🔐</div>
+                    <div class="portfolio-overlay">
+                        <h3>Digital Safe Box</h3>
+                        <p>Secure digital lock system built with logic gates (AND, OR, NOT, XOR). Features password authentication, alarm system, and hardware implementation using breadboard & ICs.</p>
+                        <span style="display: inline-block; margin-top: 10px; font-size: 0.9rem; color: var(--beige);">
+                            🔗 View on GitHub →
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Project 2: Line Follower Robot -->
+            <div class="portfolio-item">
+                <a href="https://github.com/GANNAAMR66/Arduino-Based-Line-Follower-Robot" target="_blank" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop" alt="Line Follower Robot" class="portfolio-image" onerror="this.parentElement.querySelector('.portfolio-placeholder').style.display='flex'; this.style.display='none';">
+                    <div class="portfolio-placeholder" style="display: none;">🤖</div>
+                    <div class="portfolio-overlay">
+                        <h3>Line Follower Robot</h3>
+                        <p>Arduino-based autonomous robot with IR sensors for line tracking. Features PID control algorithm, obstacle avoidance, and smart navigation system.</p>
+                        <span style="display: inline-block; margin-top: 10px; font-size: 0.9rem; color: var(--beige);">
+                            🔗 View on GitHub →
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Project 3: Temperature Predictor -->
+<div class="portfolio-item">
+    <a href="https://github.com/GANNAAMR66/-Temperature-Predictor-24h-Cairo-Approx.-" target="_blank" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Temperature Predictor" class="portfolio-image">
+        <div class="portfolio-placeholder" style="display: none;">🌡️</div>
+        <div class="portfolio-overlay">
+            <h3>Temperature Predictor</h3>
+            <p>ML model to predict 24-hour temperature in Cairo using historical weather data. Built with Python, Pandas, Scikit-Learn, and data visualization tools.</p>
+            <span style="display: inline-block; margin-top: 10px; font-size: 0.9rem; color: var(--beige);">
+                🔗 View on GitHub →
+            </span>
+        </div>
+    </a>
+</div>
+          
+            <!-- Project 4: Count Fingers -->
+<div class="portfolio-item">
+    <a href="https://github.com/GANNAAMR66/Count-Fingers-Using-OpenCV" target="_blank" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+       <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?w=600&h=400&fit=crop" alt="Count Fingers Using OpenCV" class="portfolio-image">
+        <div class="portfolio-placeholder" style="display: none;">🖐️</div>
+        <div class="portfolio-overlay">
+            <h3>Count Fingers</h3>
+            <p>Computer vision system that detects and counts fingers in real-time using hand tracking, contour detection, and convexity defects analysis. Built with OpenCV, Python, and MediaPipe for accurate gesture recognition.</p>
+            <span style="display: inline-block; margin-top: 10px; font-size: 0.9rem; color: var(--beige);">
+                🔗 View on GitHub →
+            </span>
+        </div>
+    </a>
+</div>
+
+            <!-- Project 5: Mobile Camera Streaming -->
+            <div class="portfolio-item">
+                <a href="https://github.com/GANNAAMR66/Mobile-Camera-Streaming-to-Laptop-using-OpenCV" target="_blank" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&h=400&fit=crop" alt="Mobile Camera Streaming" class="portfolio-image" onerror="this.parentElement.querySelector('.portfolio-placeholder').style.display='flex'; this.style.display='none';">
+                    <div class="portfolio-placeholder" style="display: none;">📹</div>
+                    <div class="portfolio-overlay">
+                        <h3>Mobile Camera Streaming</h3>
+                        <p>Real-time video streaming from mobile camera to laptop using OpenCV and socket programming. Features low-latency transmission, cross-platform compatibility, and efficient video processing.</p>
+                        <span style="display: inline-block; margin-top: 10px; font-size: 0.9rem; color: var(--beige);">
+                            🔗 View on GitHub →
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <p class="section-subtitle">Let's work together</p>
+        <div class="contact-content">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Do you have a project in mind? I am here to help you</p>
+            
+            <div class="contact-info">
+                <!-- Phone -->
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="tel:+201148732233" style="color: var(--white); text-decoration: none; transition: opacity 0.3s;">
+                        +20 1148732233
+                    </a>
+                </div>
+                
+                <!-- Email -->
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:ganna662006@gmail.com" style="color: var(--white); text-decoration: none; transition: opacity 0.3s;">
+                        ganna662006@gmail.com
+                    </a>
+                </div>
+                
+                <!-- Location -->
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Elgharbia, Egypt</span>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <!-- Telegram -->
+                <a href="https://t.me/Ganna_Amr2006" target="_blank" title="Telegram" class="social-icon telegram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg>
+                </a>
+                
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/ganna-amr-emad-/" target="_blank" title="LinkedIn" class="social-icon linkedin">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                
+                <!-- GitHub -->
+                <a href="https://github.com/GANNAAMR66" target="_blank" title="GitHub" class="social-icon github">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                
+                <!-- Email -->
+                <a href="mailto:ganna662006@gmail.com" title="Email" class="social-icon email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Ganna Amr Emad. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // === Active Navigation Link Management ===
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section[id]');
+
+        // Handle click: add active class immediately + smooth scroll
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                // Add active to clicked link
+                this.classList.add('active');
+                
+                // Smooth scroll to target section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Update active link on scroll using Intersection Observer
+        const observerOptions = {
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // === Animate Skills Progress Bars on Scroll ===
+        const skillsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-progress');
+                    skillBars.forEach(bar => {
+                        // Get target width from CSS variable
+                        const targetWidth = bar.style.getPropertyValue('--width') || bar.style.width;
+                        bar.style.width = '0';
+                        // Trigger reflow
+                        void bar.offsetWidth;
+                        // Animate to target width
+                        bar.style.width = targetWidth;
+                    });
+                    // Stop observing after animation
+                    skillsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const skillsSection = document.querySelector('.skills');
+        if (skillsSection) {
+            skillsObserver.observe(skillsSection);
+        }
+
+        // Set Home as active on page load
+        window.addEventListener('load', () => {
+            const homeLink = document.querySelector('.nav-links a[href="#home"]');
+            if (homeLink && !document.querySelector('.nav-links a.active')) {
+                homeLink.classList.add('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
