@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganna Amr Emad | AI & Data Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* === LIGHT MODE (Luxurious Beige) === */
+        :root {
+            --bg-primary: #FAF8F5;
+            --bg-secondary: #F2EDE8;
+            --bg-card: #FFFFFF;
+            --text-primary: #2D2420;
+            --text-secondary: #6B5E55;
+            --accent: #8B7355;
+            --accent-gold: #C5A065;
+            --accent-glow: rgba(197, 160, 101, 0.2);
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(139, 115, 85, 0.15);
+            --shadow: 0 10px 40px rgba(92, 74, 61, 0.08);
+            --shadow-hover: 0 20px 50px rgba(92, 74, 61, 0.15);
+        }
+
+        /* === DARK MODE (Luxurious Dark) === */
+        [data-theme="dark"] {
+            --bg-primary: #0F0E0D;
+            --bg-secondary: #1A1816;
+            --bg-card: #1E1C1A;
+            --text-primary: #F5F1ED;
+            --text-secondary: #A89F95;
+            --accent: #C5A065;
+            --accent-gold: #E0C080;
+            --accent-glow: rgba(197, 160, 101, 0.3);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* Animated Background Gradient */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, transparent 50%);
+            animation: rotateBg 25s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes rotateBg {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+            transition: background 0.4s ease;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        .theme-toggle:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: rotate(15deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 5rem;
+            position: relative;
+        }
+
+        .hero-content { text-align: center; max-width: 900px; z-index: 1; }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: var(--glass);
+            color: var(--accent);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(5px);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero h1 span { color: var(--accent); font-style: italic; }
+
+        .typing-text {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            min-height: 2rem;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--accent);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1.5px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        /* Sections General */
+        section { padding: 8rem 5%; }
+        .section-header { text-align: center; margin-bottom: 5rem; }
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        .section-header h2 span { color: var(--accent); }
+        .section-header p { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        /* Impact Stats Section */
+        .stats-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 4rem 5%;
+        }
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .stat-item p { color: var(--text-secondary); font-size: 1rem; font-weight: 500; }
+
+        /* About Section */
+        .about-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--accent) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+        .about-image img { width: 100%; height: 100%; object-fit: cover; }
+        .about-text h3 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1.5rem; }
+        .about-text p { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.05rem; }
+
+        /* Skills Section */
+        .skills-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .skill-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow);
+        }
+        .skill-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-hover);
+        }
+        .skill-icon { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .skill-card h3 { color: var(--text-primary); margin-bottom: 1rem; font-size: 1.2rem; }
+        .skill-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-tag {
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-secondary);
+            color: var(--accent);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+        .portfolio-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: var(--shadow);
+        }
+        .portfolio-card:hover {
+            transform: translateY(-10px) scale(1.01);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-hover);
+        }
+        .portfolio-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .portfolio-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .portfolio-card:hover .portfolio-image img { transform: scale(1.1); }
+        
+        .portfolio-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .portfolio-content h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.8rem; }
+        .portfolio-content p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
+        .portfolio-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .tech-badge {
+            font-size: 0.75rem;
+            padding: 0.3rem 0.7rem;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border-radius: 4px;
+            font-weight: 600;
+            border: 1px solid var(--glass-border);
+        }
+        .portfolio-links { display: flex; gap: 1rem; margin-top: auto; }
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: gap 0.3s ease;
+        }
+        .portfolio-link:hover { gap: 0.8rem; }
+
+        /* Contact Section */
+        .contact { background: var(--bg-secondary); border-top: 1px solid var(--glass-border); }
+        .contact-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .contact-item {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        .contact-item:hover { border-color: var(--accent); transform: translateY(-5px); }
+        
+        /* FIX: Prevent email from overflowing the box */
+        .contact-item a { 
+            color: var(--text-primary); 
+            text-decoration: none; 
+            font-size: 1rem; 
+            font-weight: 500; 
+            display: block; 
+            margin-top: 0.5rem; 
+            word-break: break-all;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        
+        .contact-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+        .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 4rem; }
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+        }
+        .social-link:hover { background: var(--accent); color: var(--bg-primary); transform: translateY(-5px); border-color: var(--accent); }
+        .social-link svg { width: 22px; height: 22px; fill: currentColor; }
+
+        footer { background: var(--bg-primary); color: var(--text-secondary); text-align: center; padding: 2rem; font-size: 0.9rem; border-top: 1px solid var(--glass-border); }
+
+        /* Scroll Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .nav-links { display: none; } /* Can add hamburger menu later if needed */
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .cta-group { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Ganna Amr.</a>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#portfolio">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+                    🌙
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">Artificial Intelligence & Bioinformatics</div>
+            <h1>Building Intelligent <br><span>Data-Driven</span> Solutions</h1>
+            <div class="typing-text">
+                I am an <span id="typing"></span><span class="cursor">|</span>
+            </div>
+            <div class="cta-group">
+                <a href="#portfolio" class="btn btn-primary">View My Work ↓</a>
+                <a href="https://github.com/GANNAAMR66" target="_blank" class="btn btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Stats Section -->
+    <section class="stats-section reveal">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>3.88</h3>
+                <p>Outstanding GPA</p>
+            </div>
+            <div class="stat-item">
+                <h3>9+</h3>
+                <p>End-to-End Projects</p>
+            </div>
+            <div class="stat-item">
+                <h3>98%</h3>
+                <p>OMR Grading Accuracy</p>
+            </div>
+            <div class="stat-item">
+                <h3>DEPI</h3>
+                <p>Certified Data Engineer</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="section-header reveal">
+            <h2>About <span>Me</span></h2>
+            <p>The intersection of biological data and artificial intelligence.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-image reveal">
+                <!-- تم تحديث اسم الصورة إلى جنة.jpg مع إضافة fallback احتياطي -->
+                <img src="جنة.jpg" alt="Ganna Amr Emad" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--accent);font-size:5rem;font-family:Playfair Display;\'>GA</div>'">
+            </div>
+            <div class="about-text reveal">
+                <h3>AI Engineer & Data Enthusiast</h3>
+                <p>I am an Artificial Intelligence student specializing in Bioinformatics at Kafr El-Sheikh University. My passion lies in bridging the gap between complex biological data and intelligent, automated systems.</p>
+                <p>Through my journey in the Digital Egypt Pioneers Initiative (DEPI) and various hands-on projects, I have developed expertise in building end-to-end machine learning pipelines, computer vision applications, and robust data engineering workflows.</p>
+                <p>I don't just write code; I engineer scalable solutions that transform theoretical AI concepts into practical applications delivering tangible business value.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <div class="section-header reveal">
+            <h2>Technical <span>Arsenal</span></h2>
+            <p>Tools and technologies I use to bring ideas to life.</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card reveal">
+                <div class="skill-icon">💻</div>
+                <h3>Programming</h3>
+                <p>Core languages for software development and algorithmic problem solving.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span><span class="skill-tag">C++</span><span class="skill-tag">SQL</span><span class="skill-tag">OOP</span>
+                </div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">🤖</div>
+                <h3>AI & Machine Learning</h3>
+                <p>Building predictive models and extracting insights from complex datasets.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Scikit-learn</span><span class="skill-tag">XGBoost</span><span class="skill-tag">Pandas</span><span class="skill-tag">Feature Eng.</span>
+                </div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">👁️</div>
+                <h3>Computer Vision</h3>
+                <p>Real-time image processing, object detection, and visual data analysis.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">OpenCV</span><span class="skill-tag">MediaPipe</span><span class="skill-tag">OMR</span><span class="skill-tag">Image Proc.</span>
+                </div>
+            </div>
+            <div class="skill-card reveal">
+                <div class="skill-icon">⚙️</div>
+                <h3>Data Engineering</h3>
+                <p>Designing scalable pipelines and managing large-scale data infrastructure.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Data Pipelines</span><span class="skill-tag">Azure</span><span class="skill-tag">Big Data</span><span class="skill-tag">EDA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <div class="section-header reveal">
+            <h2>Featured <span>Projects</span></h2>
+            <p>A comprehensive selection of my recent work in AI, Data, and Robotics.</p>
+        </div>
+        <div class="portfolio-grid">
+            
+            <!-- Project 1 -->
+            <div class="portfolio-card reveal">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Vitalix" onerror="this.style.display='none'">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Vitalix: Calories Prediction</h3>
+                    <p>AI-powered desktop app predicting calories burned using XGBoost regression, featuring a real-time interactive Tkinter GUI with high model accuracy.</p>
+                    <div class="portfolio-tech">
+                        <span class="tech-badge">Python</span><span class="tech-badge">XGBoost</span><span class="tech-badge">Tkinter</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/GANNAAMR66/Vitalix-Calories-Predictor" target="_blank" class="portfolio-link">View Code →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="portfolio-card reveal">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&h=400&fit=crop" alt="IMDb" onerror="this.style.display='none'">
+                </div>
+                <div class="portfolio-content">
+                    <h3>IMDb Recommendation Engine</h3>
+                    <p>End-to-end data pipeline for Top 1000 Movies, utilizing TF-IDF and Cosine Similarity to build a robust content-based recommendation system.</p>
+                    <div class="portfolio-tech">
+                        <span class="tech-badge">Python</span><span class="tech-badge">Pandas</span><span class="tech-badge">NLP</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/GANNAAMR66/IMDb-Movie-Analytics" target="_blank" class="portfolio-link">View Code →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="portfolio-card reveal">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop" alt="OMR" onerror="this.style.display='none'">
+                </div>
+                <div class="portfolio-content">
+                    <h3>OMR Auto Grading System</h3>
+                    <p>Led a university team to build an automated grading system using OpenCV. Handles rotated/skewed sheets via perspective transformation with 98% accuracy.</p>
+                    <div class="portfolio-tech">
+                        <span class="tech-badge">OpenCV</span><span class="tech-badge">Python</span><span class="tech-badge">Team Lead</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/GANNAAMR66/Core_vision" target="_blank" class="portfolio-link">View Code →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4: Temperature Prediction (Added with correct link) -->
+            <div class="portfolio-card reveal">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&h=400&fit=crop" alt="Temperature" onerror="this.style.display='none'">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Temperature Prediction Model</h3>
+                    <p>Developed a prediction model applying Bisection Method and Polynomial Interpolation to estimate Cairo's temperature at any hour (0-24) based on input data.</p>
+                    <div class="portfolio-tech">
+                        <span class="tech-badge">Python</span><span class="tech-badge">Numerical Analysis</span><span class="tech-badge">Arduino</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/GANNAAMR66/-Temperature-Predictor-24h-Cairo-Approx.-" target="_blank" class="portfolio-link">View Code →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="portfolio-card reveal">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?w=600&h=400&fit=crop" alt="Count Fingers" onerror="this.style.display='none'">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Real-Time Finger Counter</h3>
+                    <p>Computer vision system detecting and counting fingers in real-time using hand tracking, contour detection, and convexity defects analysis.</p>
+                    <div class="portfolio-tech">
+                        <span class="tech-badge">OpenCV</span><span class="tech-badge">MediaPipe</span><span class="tech-badge">Python</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/GANNAAMR66/Count-Fingers-Using-OpenCV" target="_blank" class="portfolio-link">View Code →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="portfolio-card reveal">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&h=400&fit=crop" alt="Camera Streaming" onerror="this.style.display='none'">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Mobile Camera Streaming</h3>
+                    <p>Low-latency, real-time video streaming application from a mobile device to a laptop over a local Wi-Fi network, serving as a foundation for CV tasks.</p>
+                    <div class="portfolio-tech">
+                        <span class="tech-badge">OpenCV</span><span class="tech-badge">Sockets</span><span class="tech-badge">Python</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/GANNAAMR66/Mobile-Camera-Streaming-to-Laptop-using-OpenCV" target="_blank" class="portfolio-link">View Code →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 7 -->
+            <div class="portfolio-card reveal">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop" alt="Robot" onerror="this.style.display='none'">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Autonomous Line Follower</h3>
+                    <p>Arduino-based robot utilizing IR sensors and an L298N motor driver for precise, real-time path detection and automated movement control.</p>
+                    <div class="portfolio-tech">
+                        <span class="tech-badge">Arduino</span><span class="tech-badge">C++</span><span class="tech-badge">Robotics</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/GANNAAMR66/Arduino-Based-Line-Follower-Robot" target="_blank" class="portfolio-link">View Code →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 8 -->
+            <div class="portfolio-card reveal">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop" alt="Safe Box" onerror="this.style.display='none'">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Digital Safe Box</h3>
+                    <p>Designed and implemented a secure digital lock system using AND, XOR, and NOT logic gates, applying Boolean logic for switch-based authentication.</p>
+                    <div class="portfolio-tech">
+                        <span class="tech-badge">Logic Gates</span><span class="tech-badge">Digital Design</span><span class="tech-badge">Hardware</span>
+                    </div>
+                    <div class="portfolio-links">
+                        <a href="https://github.com/GANNAAMR66/Digital-Safe-Box-using-Logic-Gates" target="_blank" class="portfolio-link">View Code →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="section-header reveal">
+            <h2>Let's Work <span>Together</span></h2>
+            <p>Have a project in mind or an internship opportunity? I'd love to hear from you.</p>
+        </div>
+        
+        <div class="contact-grid reveal">
+            <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <p>Email Me</p>
+                <!-- تم إصلاح مشكلة خروج الإيميل عن المربع -->
+                <a href="mailto:ganna662006@gmail.com">ganna662006@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <p>Call Me</p>
+                <a href="tel:+201148732233">+20 114 873 2233</a>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <p>Location</p>
+                <a href="#">Gharbia, Egypt</a>
+            </div>
+        </div>
+
+        <div class="social-links reveal">
+            <a href="https://www.linkedin.com/in/ganna-amr-emad-" target="_blank" class="social-link" title="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://github.com/GANNAAMR66" target="_blank" class="social-link" title="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="https://t.me/Ganna_Amr2006" target="_blank" class="social-link" title="Telegram">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Ganna Amr Emad. Crafted with precision and passion.</p>
+    </footer>
+
+    <script>
+        // === 1. Theme Toggle Logic (Light/Dark Mode) ===
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        // Apply saved theme on load
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+        themeToggle.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            let newTheme = theme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        // === 2. Typing Effect ===
+        const words = ["AI Engineer.", "Data Enthusiast.", "Computer Vision Developer.", "Bioinformatics Student."];
+        let i = 0;
+        let timer;
+
+        function typeWriter() {
+            const heading = document.getElementById("typing");
+            const word = words[i];
+            let currentText = heading.innerText;
+            
+            if (!this.isDeleting && currentText !== word) {
+                heading.innerText = word.substring(0, currentText.length + 1);
+                timer = setTimeout(typeWriter, 100);
+            } else if (!this.isDeleting && currentText === word) {
+                this.isDeleting = true;
+                timer = setTimeout(typeWriter, 2000); // Pause at end
+            } else if (this.isDeleting && currentText !== "") {
+                heading.innerText = word.substring(0, currentText.length - 1);
+                timer = setTimeout(typeWriter, 50);
+            } else {
+                this.isDeleting = false;
+                i = (i + 1) % words.length;
+                timer = setTimeout(typeWriter, 500);
+            }
+        }
+        typeWriter();
+
+        // === 3. Scroll Reveal Animation ===
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // === 4. Active Nav Link on Scroll ===
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a:not(.theme-toggle)');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
